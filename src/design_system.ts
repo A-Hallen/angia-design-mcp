@@ -81,37 +81,88 @@ export const designSystem = {
     family: {
       primary: "Acid Grotesk",
       secondary: "Helvetica",
-      fallback: "sans-serif"
+      fallback: "sans-serif",
+      weights: {
+        light: 300,
+        regular: 400,
+        bold: 700
+      }
     },
     scale: {
-      h1: { size: "48-56px", weight: "700", lineHeight: "1.2" },
-      h2: { size: "36-42px", weight: "700", lineHeight: "1.3" },
-      h3: { size: "28-32px", weight: "400", lineHeight: "1.3" },
-      pLarge: { size: "18-20px", weight: "400", lineHeight: "1.5" },
-      pMid: { size: "16px", weight: "400", lineHeight: "1.5" },
-      pSmall: { size: "14px", weight: "400", lineHeight: "1.4" },
-      labels: { size: "12-14px", weight: "700", lineHeight: "1.4" }
+      h1: { size: "48-56px", weight: "700", lineHeight: "1.2", spacing: { padding: "0-8px Y", margin: "16-24px bottom" } },
+      h2: { size: "36-42px", weight: "700", lineHeight: "1.3", spacing: { padding: "0-6px Y", margin: "12-20px bottom" } },
+      h3: { size: "28-32px", weight: "400", lineHeight: "1.3", spacing: { padding: "0-4px Y", margin: "8-16px bottom" } },
+      h4: { size: "24px", weight: "400", lineHeight: "1.4", spacing: { padding: "0-4px Y", margin: "6-12px bottom" } },
+      pLarge: { size: "18-20px", weight: "400", lineHeight: "1.5", spacing: { padding: "4-8px Y", margin: "8-16px bottom" } },
+      pMid: { size: "16px", weight: "400", lineHeight: "1.5", spacing: { padding: "4px Y", margin: "6-12px bottom" } },
+      pSmall: { size: "14px", weight: "400", lineHeight: "1.4", spacing: { padding: "2-4px Y", margin: "4-8px bottom" } },
+      labels: { size: "12-14px", weight: "700", lineHeight: "1.4", spacing: { padding: "2px Y", margin: "4-6px bottom" } },
+      caption: { size: "10-12px", weight: "400", lineHeight: "1.3", spacing: { padding: "1-2px Y", margin: "2-4px bottom" } }
     }
   },
   components: {
     buttons: {
-      radius: {
-        large: "12px",
-        medium: "12px",
-        small: "10px"
+      globalProps: {
+        radius: "12px (Large/Medium), 10px (Small)",
+        fontFamily: "Helvetica",
+        fontWeight: "Bold (700)",
+        alignment: "center"
       },
-      states: {
+      variants: {
         primary: {
           bg: "#8325E5",
-          hover: "#A66CE8",
-          active: "#6C1CD3",
-          disabled: "#BD9BEA"
+          text: "#FFFFFF",
+          border: "None",
+          states: {
+            normal: { bg: "#8325E5", text: "#FFFFFF" },
+            hover: { bg: "#A66CE8", text: "#FFFFFF" },
+            active: { bg: "#6C1CD3", text: "#FFFFFF" },
+            focus: { bg: "#8325E5", text: "#FFFFFF", note: "No borde, focus ring externo de 2px color claro" },
+            disabled: { bg: "#BD9BEA", text: "#FFFFFF", opacity: "50%" },
+            loading: { bg: "#8325E5", text: "Oculto", content: "Spinner centrado" }
+          }
         },
-        dark: {
-          bg: "#A974FF",
-          hover: "Ligera variación de luminosidad (más claro)",
-          focus: "Halo del mismo color"
+        secondary: {
+          bg: "#FFFFFF",
+          text: "#8325E5",
+          border: "2px solid #8325E5",
+          states: {
+            normal: { bg: "#FFFFFF", text: "#8325E5", border: "#8325E5" },
+            hover: { bg: "#F3F3F3", text: "#8325E5", border: "#8334EA" },
+            active: { bg: "#EDEDED", text: "#6C1CD3", border: "#6C1CD3" },
+            focus: { bg: "#FFFFFF", text: "#8325E5", border: "#8325E5", note: "Borde con focus ring externo de 2px" },
+            disabled: { bg: "Transparent", text: "#BD9BEA", border: "#BD9BEA", opacity: "50%" }
+          }
+        },
+        tertiary: {
+          bg: "Transparent",
+          text: "#6D6E71",
+          border: "None",
+          states: {
+            hover: { text: "#8C8C8C", bg: "Transparent" },
+            active: { text: "#545454", bg: "Transparent" },
+            disabled: { text: "#D1D2D4" }
+          }
+        },
+        destructive: {
+          bg: "#F44336",
+          text: "#FFFFFF",
+          border: "None",
+          states: {
+            hover: { bg: "#F45858" },
+            active: { bg: "#F42A25" },
+            disabled: { bg: "#FFCDD2" }
+          }
         }
+      },
+      sizes: {
+        large: { height: "48px", padding: "0 24px", fontSize: "16px", iconGap: "8px" },
+        medium: { height: "40px", padding: "0 20px", fontSize: "16px", iconGap: "8px" },
+        small: { height: "32px", padding: "0 16px", fontSize: "16px", iconGap: "6px" },
+        iconOnly: { size: "48/40/32px", padding: "0" }
+      },
+      darkThemeNotes: {
+        primary: { bg: "#A974FF", hover: "Ligera variación (+Luminosidad)" }
       }
     },
     inputs: {
