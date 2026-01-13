@@ -202,6 +202,11 @@ export const designSystem = {
       }
     },
     cards: {
+      globalProps: {
+        bg: "#FFFFFF",
+        padding: "24px (Standard), 16px (Compact)",
+        border: "None (relies on shadow) or 1px solid #E1E0E2 (if flat)"
+      },
       radius: {
         navigation: "8px",
         info: "12px",
@@ -209,6 +214,7 @@ export const designSystem = {
       },
       shadows: {
         light: "0px 2px 4px rgba(0,0,0,0.08)",
+        hover: "0px 4px 12px rgba(0,0,0,0.12)",
         dark: "0px 2px 8px rgba(0,0,0,0.4)",
         darkHover: "0px 6px 16px rgba(0,0,0,0.6)"
       },
