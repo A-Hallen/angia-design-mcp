@@ -26,21 +26,21 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
     tools: [
       {
         name: "get_color_palette",
-        description: "Get the color palette of the Angia Design System. Optional category filter.",
+        description: "Get the color palette and theme definitions (light/dark). Optional category filter.",
         inputSchema: {
           type: "object",
           properties: {
             category: {
               type: "string",
-              description: "Category to filter colors (primary, secondary, functional, backgrounds, text, borders). If omitted, returns all.",
-              enum: ["primary", "secondary", "functional", "backgrounds", "text", "borders", "darkMode"]
+              description: "Category to filter (brand, functional, light, dark). If omitted, returns all.",
+              enum: ["brand", "functional", "light", "dark"]
             }
           }
         }
       },
       {
         name: "get_typography",
-        description: "Get typography rules, font families, and type scale.",
+        description: "Get typography rules, font families, and type scale hierarchy.",
         inputSchema: {
           type: "object",
           properties: {}
@@ -48,13 +48,13 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
       },
       {
         name: "get_component_specs",
-        description: "Get design specifications for a specific UI component.",
+        description: "Get design specifications for a UI component (colors, radius, states).",
         inputSchema: {
           type: "object",
           properties: {
             component: {
               type: "string",
-              description: "The name of the component to retrieve specs for.",
+              description: "The name of the component.",
               enum: ["buttons", "inputs", "cards"]
             }
           },
@@ -63,7 +63,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
       },
       {
         name: "get_layout_rules",
-        description: "Get layout, spacing, and border radius guidelines.",
+        description: "Get layout, spacing, shadows, and responsive guidelines.",
         inputSchema: {
           type: "object",
           properties: {}
@@ -93,20 +93,22 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
   try {
     if (name === "get_color_palette") {
       const category = args?.category as string | undefined;
-      if (category) {
-        if (category in designSystem.colors) {
-          return {
-            content: [{ type: "text", text: JSON.stringify(designSystem.colors[category as keyof typeof designSystem.colors], null, 2) }]
-          };
-        } else {
-           return {
-            content: [{ type: "text", text: `Category '${category}' not found. Available: primary, secondary, functional, backgrounds, text, borders, darkMode.` }],
-            isError: true
-          };
-        }
+      
+      if (category === "brand") {
+        return { content: [{ type: "text", text: JSON.stringify(designSystem.colors.brand, null, 2) }] };
       }
+      if (category === "functional") {
+        return { content: [{ type: "text", text: JSON.stringify(designSystem.colors.functional, null, 2) }] };
+      }
+      if (category === "light") {
+        return { content: [{ type: "text", text: JSON.stringify(designSystem.themes.light, null, 2) }] };
+      }
+      if (category === "dark") {
+        return { content: [{ type: "text", text: JSON.stringify(designSystem.themes.dark, null, 2) }] };
+      }
+      
       return {
-        content: [{ type: "text", text: JSON.stringify(designSystem.colors, null, 2) }]
+        content: [{ type: "text", text: JSON.stringify({ brand: designSystem.colors.brand, themes: designSystem.themes }, null, 2) }]
       };
     }
 
@@ -124,7 +126,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         };
       }
        return {
-            content: [{ type: "text", text: `Component '${component}' not found. Available: buttons, inputs, cards.` }],
+            content: [{ type: "text", text: `Component '${component}' not found. Available: buttons, cards.` }],
             isError: true
           };
     }
