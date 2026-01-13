@@ -10,7 +10,7 @@ export const getComponentSpecsTool: Tool = {
       component: {
         type: "string",
         description: "The name of the component.",
-        enum: ["buttons", "inputs", "cards"]
+        enum: ["buttons", "inputs", "cards", "sidebar", "header"]
       }
     },
     required: ["component"]
@@ -25,7 +25,7 @@ export const handleGetComponentSpecs = (args: any) => {
     };
   }
   return {
-    content: [{ type: "text", text: `Component '${component}' not found. Available: buttons, inputs, cards.` }],
+    content: [{ type: "text", text: `Component '${component}' not found. Available: buttons, inputs, cards, sidebar, header.` }],
     isError: true
   };
 };

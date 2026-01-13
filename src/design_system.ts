@@ -120,6 +120,12 @@ export const designSystem = {
             focus: { bg: "#8325E5", text: "#FFFFFF", note: "No borde, focus ring externo de 2px color claro" },
             disabled: { bg: "#BD9BEA", text: "#FFFFFF", opacity: "50%" },
             loading: { bg: "#8325E5", text: "Oculto", content: "Spinner centrado" }
+          },
+          darkMode: {
+            bg: "#A974FF (Glow Purple)",
+            text: "#FFFFFF (or high contrast on Purple)",
+            hover: "Ligera variación (+Luminosidad)",
+            focus: "Halo del mismo color #A974FF"
           }
         },
         secondary: {
@@ -132,6 +138,12 @@ export const designSystem = {
             active: { bg: "#EDEDED", text: "#6C1CD3", border: "#6C1CD3" },
             focus: { bg: "#FFFFFF", text: "#8325E5", border: "#8325E5", note: "Borde con focus ring externo de 2px" },
             disabled: { bg: "Transparent", text: "#BD9BEA", border: "#BD9BEA", opacity: "50%" }
+          },
+          darkMode: {
+            bg: "Transparent",
+            text: "#A974FF (Glow Purple)",
+            border: "#A974FF (2px)",
+            hover: { bg: "rgba(169, 116, 255, 0.1)", border: "#A974FF" }
           }
         },
         tertiary: {
@@ -142,6 +154,10 @@ export const designSystem = {
             hover: { text: "#8C8C8C", bg: "Transparent" },
             active: { text: "#545454", bg: "Transparent" },
             disabled: { text: "#D1D2D4" }
+          },
+          darkMode: {
+            text: "#A7A8AA (Text Tertiary/Secondary)",
+            hover: { text: "#FFFFFF" }
           }
         },
         destructive: {
@@ -152,6 +168,10 @@ export const designSystem = {
             hover: { bg: "#F45858" },
             active: { bg: "#F42A25" },
             disabled: { bg: "#FFCDD2" }
+          },
+          darkMode: {
+            bg: "#F44336",
+            hover: "#F45858 (Lighter)"
           }
         }
       },
@@ -160,9 +180,6 @@ export const designSystem = {
         medium: { height: "40px", padding: "0 20px", fontSize: "16px", iconGap: "8px" },
         small: { height: "32px", padding: "0 16px", fontSize: "16px", iconGap: "6px" },
         iconOnly: { size: "48/40/32px", padding: "0" }
-      },
-      darkThemeNotes: {
-        primary: { bg: "#A974FF", hover: "Ligera variación (+Luminosidad)" }
       }
     },
     inputs: {
@@ -176,6 +193,12 @@ export const designSystem = {
         focus: { border: "#8325E5 (2px)", bg: "#FFFFFF" },
         error: { border: "#F44336", bg: "#FFCDD2" },
         disabled: { border: "#D1D2D4", bg: "#F5F5F5" }
+      },
+      darkMode: {
+        bg: "#1A1A1A (Surface)",
+        border: "#6D6E71",
+        text: "#FFFFFF",
+        focusBorder: "#A974FF (Glow Purple)"
       }
     },
     cards: {
@@ -188,6 +211,50 @@ export const designSystem = {
         light: "0px 2px 4px rgba(0,0,0,0.08)",
         dark: "0px 2px 8px rgba(0,0,0,0.4)",
         darkHover: "0px 6px 16px rgba(0,0,0,0.6)"
+      },
+      darkMode: {
+        bg: "#1A1A1A (Surface)",
+        border: "#2C2C2C (Optional separation)",
+        note: "In dark mode, depth is communicated more by shadow/elevation than by borders."
+      }
+    },
+    sidebar: {
+      dimensions: {
+        widthExpanded: "240px",
+        widthCollapsed: "80px",
+        iconSize: "24px",
+        paddingItem: "16px"
+      },
+      background: {
+        type: "gradient-vertical",
+        from: "#8325E5",
+        to: "#632FE1"
+      },
+      items: {
+        spacingIconText: "12px",
+        color: "#FFFFFF",
+        states: {
+          normal: { bg: "Transparent" },
+          hover: { bg: "rgba(255, 255, 255, 0.1)" },
+          active: { bg: "rgba(255, 255, 255, 0.2)", iconStyle: "Solid" }
+        }
+      },
+      mobile: {
+        behavior: "Hamburger menu",
+        overlay: "Semi-transparent background"
+      }
+    },
+    header: {
+      dimensions: {
+        height: "64px",
+        logoWidth: "120px",
+        profileIcon: "32px"
+      },
+      background: "#F5F5F5 (or Transparent)",
+      behavior: "Fixed/Sticky on scroll",
+      elements: {
+        logoPosition: "Top Left",
+        userPosition: "Top Right"
       }
     }
   },
