@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import {
@@ -6,6 +7,7 @@ import {
 } from "@modelcontextprotocol/sdk/types.js";
 import { z } from "zod";
 import { designSystem } from "./design_system.js";
+import { searchDesignSystem } from "./search.js";
 
 const server = new Server(
   {
@@ -66,6 +68,20 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
           type: "object",
           properties: {}
         }
+      },
+      {
+        name: "search_design_system",
+        description: "Search the entire design system for a keyword (e.g., 'purple', 'h1', 'card'). Returns all matching values and their paths.",
+        inputSchema: {
+          type: "object",
+          properties: {
+            query: {
+              type: "string",
+              description: "The search term."
+            }
+          },
+          required: ["query"]
+        }
       }
     ]
   };
@@ -116,6 +132,22 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     if (name === "get_layout_rules") {
       return {
         content: [{ type: "text", text: JSON.stringify(designSystem.layout, null, 2) }]
+      };
+    }
+
+    if (name === "search_design_system") {
+      const query = args?.query as string;
+      if (!query) {
+        return { content: [{ type: "text", text: "Please provide a query string." }], isError: true };
+      }
+      const results = searchDesignSystem(query);
+      return {
+        content: [{ 
+          type: "text", 
+          text: results.length > 0 
+            ? JSON.stringify(results, null, 2) 
+            : `No matches found for '${query}'.` 
+        }]
       };
     }
 

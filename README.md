@@ -1,48 +1,31 @@
 # Angia Design System MCP Server
 
-Este es un servidor MCP (Model Context Protocol) que contiene todas las reglas, colores y especificaciones del Manual de Diseño Web de Angia V1.
+Este servidor permite que Windsurf, Cursor y otros agentes de IA accedan instantáneamente a los colores, tipografía y especificaciones del Manual de Diseño de Angia V1.
 
-Permite a asistentes de IA (como Windsurf o Cursor) acceder a la información oficial de diseño para generar código frontend consistente.
+## Instalación (La forma más fácil)
 
-## Instalación para el equipo
+Copia y pega este bloque en tu archivo de configuración de MCP (ej. `mcp_config.json`):
 
-1. **Clonar el repositorio:**
-   ```bash
-   git clone <URL_DEL_REPOSITORIO>
-   cd angia-design-mcp
-   ```
+```json
+{
+  "mcpServers": {
+    "angia-design": {
+      "command": "npx",
+      "args": ["-y", "github:A-Hallen/angia-design-mcp"],
+      "env": {}
+    }
+  }
+}
+```
 
-2. **Instalar dependencias y construir:**
-   ```bash
-   npm install
-   npm run build
-   ```
+## ¿Qué puede hacer la IA con esto?
 
-3. **Configurar en Windsurf/Cursor:**
+Una vez instalado, el asistente tendrá superpoderes de diseño:
 
-   Abre tu archivo de configuración MCP y añade lo siguiente.
-   
-   **Nota:** Asegúrate de reemplazar `TU_USUARIO` por tu usuario real de Windows/Mac y verificar la ruta.
+- **Colores:** `get_color_palette` (Hexadecimales oficiales, modo oscuro y usos).
+- **Tipografía:** `get_typography` (Fuentes Acid Grotesk, tamaños y pesos).
+- **Componentes:** `get_component_specs` (Especificaciones para Botones, Inputs y Cards).
+- **Layout:** `get_layout_rules` (Espaciados y radios de borde).
 
-   ```json
-   {
-     "mcpServers": {
-       "angia-design": {
-         "command": "node",
-         "args": [
-           "/ruta/absoluta/hacia/angia-design-mcp/dist/index.js"
-         ],
-         "env": {}
-       }
-     }
-   }
-   ```
-
-## Capacidades
-
-El servidor ofrece las siguientes herramientas a la IA:
-
-- `get_color_palette`: Obtiene colores hexadecimales y sus usos (Primary, Dark Mode, Functional, etc.).
-- `get_typography`: Reglas de fuentes, tamaños y pesos.
-- `get_component_specs`: Specs técnicas para Botones, Inputs y Cards.
-- `get_layout_rules`: Espaciados, radios de borde y sombras.
+---
+*Desarrollado para el equipo de Angia.*
