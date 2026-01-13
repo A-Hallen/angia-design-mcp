@@ -22,6 +22,7 @@ Copia y pega este bloque en tu archivo de configuración de MCP (ej. `mcp_config
 
 Una vez instalado, el asistente tendrá superpoderes de diseño:
 
+- **Búsqueda Global:** `search_design_system` (Encuentra cualquier color, componente o regla por palabra clave).
 - **Colores:** `get_color_palette` (Hexadecimales oficiales, modo oscuro y usos).
 - **Tipografía:** `get_typography` (Fuentes Acid Grotesk, tamaños y pesos).
 - **Componentes:** `get_component_specs` (Especificaciones para Botones, Inputs y Cards).
